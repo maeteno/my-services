@@ -10,6 +10,7 @@ services:
       - ./drone/github:/var/lib/drone/
     restart: always
     environment:
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION}
       - DRONE_OPEN=true
       - DRONE_HOST=${DRONE_GITHUB_HOST}
       - DRONE_GITHUB=true
@@ -35,6 +36,7 @@ services:
       - ./drone/coding:/var/lib/drone/:rw
     restart: always
     environment:
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION}  
       - DRONE_OPEN=true
       - DRONE_HOST=${DRONE_CODING_HOST}
       - DRONE_CODING=true
