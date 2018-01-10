@@ -1,0 +1,66 @@
+version: '2'
+
+services:
+  ideas-server:
+    image: hub.c.163.com/ssisoo/ideas
+
+  github-server:
+    image: drone/drone:0.8
+    volumes:
+      - ./drone/github:/var/lib/drone/
+    restart: always
+    environment:
+      - DRONE_OPEN=true
+      - DRONE_HOST=${DRONE_GITHUB_HOST}
+      - DRONE_GITHUB=true
+      - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT}
+      - DRONE_GITHUB_SECRET=${DRONE_GITHUB_SECRET}
+      - DRONE_SECRET=${DRONE_GITHUB_SECRET}
+
+  github-agent:
+    image: drone/agent:0.8
+    command: agent
+    restart: always
+    depends_on:
+      - github-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER=github-server:9000
+      - DRONE_SECRET=${DRONE_GITHUB_SECRET}
+
+  coding-server:
+    image: drone/drone:0.8
+    volumes:
+      - ./drone/coding:/var/lib/drone/
+    restart: always
+    environment:
+      - DRONE_OPEN=true
+      - DRONE_HOST=${CODING_DRONE_HOST}
+      - DRONE_CODING=true
+      - DRONE_CODING_CLIENT=${DRONE_CODING_CLIENT}
+      - DRONE_CODING_SECRET=${DRONE_CODING_SECRET}
+      - DRONE_SECRET=${DRONE_CODING_SECRET}
+
+  coding-agent:
+    image: drone/agent:0.8
+    command: agent
+    restart: always
+    depends_on:
+      - coding-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER=coding-server:9000
+      - DRONE_SECRET=${DRONE_CODING_SECRET}
+
+  haproxy-server:
+    image: haproxy
+    ports:
+      - 80:80
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    depends_on:
+      - ideas-server
+      - github-server
+      - coding-server
