@@ -30,7 +30,7 @@ services:
       - DRONE_SECRET=${DRONE_GITHUB_SECRET}
 
   coding-server:
-    image: drone/drone:0.8
+    image: houseboy/drone:20170512.1
     volumes:
       - ./drone/coding:/var/lib/drone/
     restart: always
@@ -45,7 +45,7 @@ services:
       - DRONE_SECRET=${DRONE_CODING_SECRET}
 
   coding-agent:
-    image: drone/agent:0.8
+    image: houseboy/drone:20170512.1
     command: agent
     restart: always
     depends_on:
