@@ -27,6 +27,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION}
       - DRONE_SERVER=github-server:9000
       - DRONE_SECRET=${DRONE_GITHUB_SECRET}
 
@@ -36,7 +37,7 @@ services:
       - ./drone/coding:/var/lib/drone/:rw
     restart: always
     environment:
-      - DOCKER_API_VERSION=${DOCKER_API_VERSION}  
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION}
       - DRONE_OPEN=true
       - DRONE_HOST=${DRONE_CODING_HOST}
       - DRONE_CODING=true
@@ -55,6 +56,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
+      - DOCKER_API_VERSION=${DOCKER_API_VERSION}
       - DRONE_SERVER=ws://coding-server:8000/ws/broker
       - DRONE_SECRET=${DRONE_CODING_SECRET}
 
