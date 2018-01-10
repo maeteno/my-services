@@ -53,7 +53,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - DRONE_SERVER=coding-server:9000
+      - DRONE_SERVER=ws://coding-server:8000/ws/broker
       - DRONE_SECRET=${DRONE_CODING_SECRET}
 
   haproxy-server:
