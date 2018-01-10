@@ -32,7 +32,7 @@ services:
   coding-server:
     image: houseboy/drone:20170512.1
     volumes:
-      - ./drone/coding:/var/lib/drone/
+      - ./drone/coding:/var/lib/drone/:rw
     restart: always
     environment:
       - DRONE_OPEN=true
