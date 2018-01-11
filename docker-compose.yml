@@ -4,6 +4,11 @@ services:
   ideas-server:
     image: hub.c.163.com/ssisoo/ideas
 
+  ss-server:
+    image:  ./ssserver
+    volumes:
+      - ./ssserver/config/shadowsocks.json:/etc/shadowsocks.json
+
   github-server:
     image: drone/drone:0.8
     volumes:
@@ -70,3 +75,4 @@ services:
       - ideas-server
       - github-server
       - coding-server
+      - ss-server
