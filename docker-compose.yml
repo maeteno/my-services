@@ -5,7 +5,8 @@ services:
     image: hub.c.163.com/ssisoo/ideas
 
   ss-server:
-    image:  ./ssserver
+    build:
+      context: ./ssserver
     volumes:
       - ./ssserver/config/shadowsocks.json:/etc/shadowsocks.json
 
