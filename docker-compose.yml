@@ -11,6 +11,7 @@ services:
       - 8988:8988
     volumes:
       - ./ssserver/config/shadowsocks.json:/etc/shadowsocks.json
+    net: host
 
   github-server:
     image: drone/drone:0.8
