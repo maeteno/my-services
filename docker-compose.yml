@@ -4,15 +4,6 @@ services:
   ideas-server:
     image: hub.c.163.com/ssisoo/ideas
 
-  ss-server:
-    build:
-      context: ./ssserver
-    ports:
-      - 8988:8988
-    volumes:
-      - ./ssserver/config/shadowsocks.json:/etc/shadowsocks.json
-    net: host
-
   github-server:
     image: drone/drone:0.8
     volumes:
