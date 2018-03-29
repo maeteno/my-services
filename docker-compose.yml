@@ -73,7 +73,7 @@ services:
       - gitlab-server
 
   gitlab-server:
-    images: gitlab/gitlab-ce:latest
+    image: gitlab/gitlab-ce:latest
     volumes:
         - /opt/gitlab/config:/etc/gitlab
         - /opt/gitlab/logs:/var/log/gitlab
