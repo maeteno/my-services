@@ -66,19 +66,3 @@ services:
       - 80:80
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-
-  gitlab-server:
-    image: gitlab/gitlab-ce:latest
-    volumes:
-        - /opt/gitlab/config:/etc/gitlab
-        - /opt/gitlab/logs:/var/log/gitlab
-        - /opt/gitlab/data:/var/opt/gitlab
-    restart: always
-    hostname: gitlab.maeteno.com
-
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    volumes:
-      - /opt/gitlab-runner/config:/etc/gitlab-runner
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: always
